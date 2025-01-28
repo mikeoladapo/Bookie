@@ -94,7 +94,7 @@ class AuthorViewSet(viewsets.ViewSet):
         user.delete()
         return Response({"detail": "Author deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     
-class CategorySerializer(viewsets.ViewSet):
+class CategoryViewSet(viewsets.ViewSet):
     def create(self,request):
         serializer = CategorySerializer(request.data)
         if serializer.is_valid():
@@ -123,4 +123,3 @@ class CategorySerializer(viewsets.ViewSet):
         user = get_object_or_404(queryset,pk=pk)
         user.delete()
         return Response({"detail": "Category deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
-    
