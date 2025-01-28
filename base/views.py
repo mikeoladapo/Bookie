@@ -33,5 +33,63 @@ class CustomUserViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset,pk=pk)
         user.delete()
         return Response({"detail": "User deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
-
     
+class BookViewSet(viewsets.ViewSet):
+    def create(self,request):
+        serializer = BookSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response (serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
+    def list(self,request):
+        queryset = Book.objects.all()
+        serializer = BookSerializer(queryset,many=True)
+        return Response(serializer.data)
+    def retrieve(self,request,pk=None):
+        queryset = Book.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        serializer = BookSerializer(user)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    def update(self,request,pk=None):
+        queryset = Book.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        serializer = BookSerializer(user,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response (serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def destroy(self,request,pk=None):
+        queryset = Book.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        user.delete()
+        return Response({"detail": "book deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+    
+class AuthorViewSet(viewsets.ViewSet):
+    def create(self,request):
+        serializer = AuthorSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response (serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
+    def list(self,request):
+        queryset = Author.objects.all()
+        serializer = AuthorSerializer(queryset,many=True)
+        return Response(serializer.data)
+    def retrieve(self,request,pk=None):
+        queryset = Author.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        serializer = AuthorSerializer(user)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    def update(self,request,pk=None):
+        queryset = Author.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        serializer = AuthorSerializer(user,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response (serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def destroy(self,request,pk=None):
+        queryset = Author.objects.all()
+        user = get_object_or_404(queryset,pk=pk)
+        user.delete()
+        return Response({"detail": "Author deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
