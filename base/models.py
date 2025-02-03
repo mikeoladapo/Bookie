@@ -32,9 +32,12 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
                                 error_messages={"unique":"username is already taken"})
     email = models.EmailField()
     password = models.CharField()
+    profile_picture = models.ImageField(upload_to="profile_picture",null=True,blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    groups = models.ManyToManyField("auth.Group",related_name="customuser_set")
+    user_permissions = models.ManyToManyField("auth.Permission",related_name="customuser_permissions_set",blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
     objects = CustomUserManager()
@@ -51,6 +54,7 @@ class Category(models.Model):
 class Book(models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(Author,on_delete=models.CASCADE)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
     released_date = models.DateTimeField()
-    price = models.DecimalField(decimal_places=2)
+    price = models.DecimalField(max_digits=10,decimal_places=2)
+    picture = models.ImageField(upload_to="book_picture",blank=True,null=True)
