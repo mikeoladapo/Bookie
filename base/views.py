@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 
 class CustomUserViewSet(viewsets.ViewSet):
     def create(self,request):
-        serializer = CustomUserSerializer(request.data)
+        serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response (serializer.data , status=status.HTTP_201_CREATED)
@@ -36,7 +36,7 @@ class CustomUserViewSet(viewsets.ViewSet):
     
 class BookViewSet(viewsets.ViewSet):
     def create(self,request):
-        serializer = BookSerializer(request.data)
+        serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response (serializer.data , status=status.HTTP_201_CREATED)
@@ -66,7 +66,7 @@ class BookViewSet(viewsets.ViewSet):
     
 class AuthorViewSet(viewsets.ViewSet):
     def create(self,request):
-        serializer = AuthorSerializer(request.data)
+        serializer = AuthorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response (serializer.data , status=status.HTTP_201_CREATED)
@@ -96,7 +96,7 @@ class AuthorViewSet(viewsets.ViewSet):
     
 class CategoryViewSet(viewsets.ViewSet):
     def create(self,request):
-        serializer = CategorySerializer(request.data)
+        serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response (serializer.data , status=status.HTTP_201_CREATED)
