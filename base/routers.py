@@ -5,7 +5,7 @@ router = DefaultRouter()
 router.register(r"users",CustomUserViewSet,basename="user")
 router.register(r"categories",CategoryViewSet,basename="category")
 router.register(r"books",BookViewSet,basename="book")
-router.register(r"authors",AuthorViewSet,basename="user")
+router.register(r"authors",AuthorViewSet,basename="author")
 
 
-urlpatterns = router
+urlpatterns = router.urls 
