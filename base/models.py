@@ -30,7 +30,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     username = models.CharField(max_length=20,unique=True,
                                 validators=[username_regex],
                                 error_messages={"unique":"username is already taken"})
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField()
     profile_picture = models.ImageField(upload_to="profile_picture",null=True,blank=True)
     is_active = models.BooleanField(default=True)
@@ -38,8 +38,8 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     groups = models.ManyToManyField("auth.Group",related_name="customuser_set")
     user_permissions = models.ManyToManyField("auth.Permission",related_name="customuser_permissions_set",blank=True)
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
     objects = CustomUserManager()
     def __str__(self):
         return self.username

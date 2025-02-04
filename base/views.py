@@ -1,10 +1,12 @@
 from .models import CustomUser,Book,Category,Author
+from rest_framework.parsers import MultiPartParser,FormParser
 from .serializers import CustomUserSerializer,BookSerializer,CategorySerializer,AuthorSerializer
 from rest_framework import viewsets,status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 class CustomUserViewSet(viewsets.ViewSet):
+    parser_classes = (MultiPartParser,FormParser)
     def create(self,request):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
@@ -35,6 +37,7 @@ class CustomUserViewSet(viewsets.ViewSet):
         return Response({"detail": "User deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     
 class BookViewSet(viewsets.ViewSet):
+    parser_classes = (MultiPartParser,FormParser)
     def create(self,request):
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():

@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#AUTH_USER_MODEL = 'base.CustomUser'
+AUTH_USER_MODEL = 'base.CustomUser'
 
 
 # Application definition
@@ -143,3 +143,16 @@ CLOUDINARY_STORAGE = {
 
 # 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.BrowsableAPIRenderer',  # Enables the browsable API
+        'rest_framework.renderers.JSONRenderer',  # Enables JSON responses
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',  # Required for file uploads
+    ),
+}
