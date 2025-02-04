@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser ,BaseUserManager,PermissionsMixin
 from django.core.validators import RegexValidator
+from cloudinary.models import CloudinaryField 
 
 class CustomUserManager(BaseUserManager):
     def create_user(self,email,password=None,**extra_fields):
@@ -32,7 +33,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
                                 error_messages={"unique":"username is already taken"})
     email = models.EmailField(unique=True)
     password = models.CharField()
-    profile_picture = models.ImageField(upload_to="profile_picture",null=True,blank=True)
+    profile_picture = CloudinaryField('profile_picture', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -57,4 +58,4 @@ class Book(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     released_date = models.DateTimeField()
     price = models.DecimalField(max_digits=10,decimal_places=2)
-    picture = models.ImageField(upload_to="book_picture",blank=True,null=True)
+    picture = CloudinaryField("book_picture",blank=True,null=True)
