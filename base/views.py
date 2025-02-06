@@ -106,7 +106,8 @@ class AuthorViewSet(viewsets.ViewSet):
         serializer = AuthorSerializer(data=request.data)
         if serializer.is_valid():
             bio = serializer.validated_data.get("bio","")
-            return Author.objects.create(user=user,bio=bio)
+            author = Author.objects.create(user=user, bio=bio)
+            return Response(AuthorSerializer(author).data, status=status.HTTP_201_CREATED)
         return Response (serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryViewSet(viewsets.ViewSet):
