@@ -38,7 +38,7 @@ class CustomUserSerializer(serializers.Serializer):
         return value
     
 class AuthorSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField()
+    user = serializers.StringRelatedField(read_only=True)
     class Meta:
         model = Author
         fields =  ['id', 'user', 'bio']
