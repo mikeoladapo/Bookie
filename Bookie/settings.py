@@ -15,7 +15,7 @@ import os
 from dotenv import load_dotenv
 import cloudinary
 import cloudinary.uploader
-import cloudinary.api
+import cloudinary.api  
 
 load_dotenv()
 
