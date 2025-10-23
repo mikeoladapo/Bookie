@@ -80,7 +80,7 @@ class BookViewSet(viewsets.ViewSet):
         return Response({"detail": "book deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     
 class AuthorViewSet(viewsets.ViewSet):
-    
+    #author
     def create(self,request):
         serializer = AuthorSerializer(data=request.data)
         if serializer.is_valid():
