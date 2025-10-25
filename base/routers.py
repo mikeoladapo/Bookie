@@ -8,4 +8,4 @@ router.register(r"books",BookViewSet,basename="book")
 router.register(r"authors",AuthorViewSet,basename="author")
 
 
-rlpatterns = router.urls 
+urlpatterns = router.urls 
